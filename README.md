@@ -14,7 +14,7 @@ java swing application running inside a docker container.
 - ubuntu:latest
 
 ## To run
-```sudo ./install.sh -u```
+```xhost +localhost && sudo ./install.sh -u```
 
 ## To stop (optional)
-```sudo ./install.sh -d```
+```xhost && sudo ./install.sh -d```

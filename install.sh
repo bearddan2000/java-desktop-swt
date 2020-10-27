@@ -73,23 +73,28 @@ function usage() {
 }
 function start-up(){
 
-    scope="start-up"
-    info_base="[$timestamp INFO]: $basefile::$scope"
+  scope="start-up"
+  docker_img_name="java-desktop-swt"
+  info_base="[$timestamp INFO]: $basefile::$scope"
 
-    echo "$info_base started" >> $logfile
+  echo "$info_base started" >> $logfile
 
-    echo "$info_base build image" >> $logfile
+  echo "$info_base setting display permissions to localhost" >> $logfile
 
-    sudo docker build -t swt .
+  xhost +localhost
 
-    echo "$info_base running image" >> $logfile
+  echo "$info_base build image" >> $logfile
 
-    sudo docker run -ti --rm -e DISPLAY=$DISPLAY \
-      -v /tmp/.X11-unix:/tmp/.X11-unix swt
+  sudo docker build -t ${docker_img_name} .
 
-    echo "$info_base ended" >> $logfile
+  echo "$info_base running image" >> $logfile
 
-    echo "================" >> $logfile
+  sudo docker run -ti --rm -e DISPLAY=$DISPLAY \
+    -v /tmp/.X11-unix:/tmp/.X11-unix ${docker_img_name}
+
+  echo "$info_base ended" >> $logfile
+
+  echo "================" >> $logfile
 }
 function tear-down(){
 

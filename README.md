@@ -18,3 +18,6 @@ java swing application running inside a docker container.
 
 ## To stop (optional)
 ```xhost && sudo ./install.sh -d```
+
+## To see help
+`sudo ./install.sh -h`
